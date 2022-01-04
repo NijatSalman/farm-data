@@ -1,5 +1,7 @@
 package com.company.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,18 +18,21 @@ import java.util.Date;
 @EqualsAndHashCode
 public class Farm {
 
-    @SequenceGenerator(name = "entitySeq", sequenceName = "ID_GENERATOR_SEQUENCE", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "entitySeq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     @Id
     private Long id;
 
     @Column(name = "LOCATION")
+    @JsonProperty("location")
     private String location;
     @Column(name = "DATE_TIME")
-    private Date dateTime;
+    @JsonProperty("datetime")
+    private Date datetime;
     @Column(name = "SENSOR_TYPE")
+    @JsonProperty("sensorType")
     private String sensorType;
     @Column(name = "VALUE")
+    @JsonProperty("value")
     private String value;
 }
