@@ -34,5 +34,5 @@ public class Farm {
     private String sensorType;
     @Column(name = "VALUE")
     @JsonProperty("value")
-    private String value;
+    private float value;
 }

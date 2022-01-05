@@ -1,6 +1,6 @@
 package com.company.rest.controller;
 
-import com.company.dao.entity.Farm;
+import com.company.model.dto.FarmDto;
 import com.company.services.FarmService;
 import com.company.utility.CsvReadUtility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,6 @@ public class FarmController {
 
     @PostMapping(value = "/upload", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public void uploadMultipart(@RequestParam("file") MultipartFile file) throws IOException {
-        farmService.saveAll(CsvReadUtility.read(Farm.class, file.getInputStream()));
+        farmService.saveAll(CsvReadUtility.filteredDataMapToEntity(FarmDto.class, file.getInputStream()));
     }
 }
