@@ -1,18 +1,19 @@
 package com.company.rest.controller;
 
 import com.company.model.dto.FarmDto;
+import com.company.model.view.TableView;
 import com.company.services.FarmService;
 import com.company.utility.CsvReadUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("farm")
@@ -24,6 +25,22 @@ public class FarmController {
 
     @PostMapping(value = "/upload", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public void uploadMultipart(@RequestParam("file") MultipartFile file) throws IOException {
+        String fileFormat="text/csv";
+        if (!fileFormat.equals(file.getContentType())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"File format is invalid");
+        }
         farmService.saveAll(CsvReadUtility.filteredDataMapToEntity(FarmDto.class, file.getInputStream()));
     }
+
+        @GetMapping("select/{offset}/{pageSize}")
+        public TableView<FarmDto> getFarmsByMonth(@PathVariable int offset,
+                                                  @PathVariable int pageSize, @RequestParam(required = false) List<Integer> months){
+        System.out.println("offset"+offset+"pageSize"+pageSize+"months"+months);
+        if (months==null){
+            return farmService.selectAllFarms(offset, pageSize);
+        } else {
+            return farmService.selectAllFarmsByMonth(offset, pageSize, months);
+        }
+    }
+
 }

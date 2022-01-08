@@ -1,6 +1,5 @@
 package com.company.dao.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,12 +25,15 @@ public class Farm {
     @Column(name = "LOCATION")
     @JsonProperty("location")
     private String location;
+
     @Column(name = "DATE_TIME")
     @JsonProperty("datetime")
     private Date datetime;
+
     @Column(name = "SENSOR_TYPE")
     @JsonProperty("sensorType")
     private String sensorType;
+
     @Column(name = "VALUE")
     @JsonProperty("value")
     private float value;
