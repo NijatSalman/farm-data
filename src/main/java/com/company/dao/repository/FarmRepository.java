@@ -14,4 +14,10 @@ public interface FarmRepository extends JpaRepository<Farm,Long> {
     @Query(nativeQuery =true,value = "SELECT * FROM farm WHERE MONTH(DATE_TIME) IN (:months)")
     Page<Farm> findAllByMonths(Pageable pageable, @Param("months") List<Integer> months);
 
+    @Query(nativeQuery =true,value = "SELECT * FROM farm WHERE MONTH(DATE_TIME) IN (:months) and SENSOR_TYPE=(:sensorType)")
+     Page<Farm> findAllByMonthsAndSensorType(Pageable pageable, @Param("months") List<Integer> months,@Param("sensorType") String value);
+
+    @Query(nativeQuery =true,value = "SELECT * FROM farm WHERE SENSOR_TYPE=(:sensorType)")
+    Page<Farm> findAllBySensorType(Pageable pageable,@Param("sensorType") String value);
+
 }

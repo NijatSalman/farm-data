@@ -34,13 +34,17 @@ public class FarmController {
 
         @GetMapping("select/{offset}/{pageSize}")
         public TableView<FarmDto> getFarmsByMonth(@PathVariable int offset,
-                                                  @PathVariable int pageSize, @RequestParam(required = false) List<Integer> months){
-        System.out.println("offset"+offset+"pageSize"+pageSize+"months"+months);
-        if (months==null){
+                                                  @PathVariable int pageSize,
+                                                  @RequestParam(required = false) List<Integer> months,
+                                                  @RequestParam(required = false) String sensorType){
+        if (months==null && sensorType==null){
             return farmService.selectAllFarms(offset, pageSize);
-        } else {
+        }else if (months==null){
+            return  farmService.selectAllFarmsBySensorType(offset,pageSize,sensorType);
+        }else if (sensorType==null){
             return farmService.selectAllFarmsByMonth(offset, pageSize, months);
         }
+            return farmService.selectAllFarmsByMonthsAndSensorType(offset,pageSize,months,sensorType);
     }
 
 }

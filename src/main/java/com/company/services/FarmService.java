@@ -9,11 +9,13 @@ import java.util.List;
 public interface FarmService {
      void saveAll(List<Farm> farms);
 
-//     Page<Farm> selectAllFarmsByMonth(int offset,int pageSize,List<Integer> months);
-//
-//     Page<Farm> selectAllFarms(int offset,int pageSize);
-
      TableView<FarmDto> selectAllFarmsByMonth(int offset, int pageSize, List<Integer> months);
 
+     TableView<FarmDto> selectAllFarmsByMonthsAndSensorType(int offset, int pageSize,List<Integer> months,String sensorType);
+
+     TableView<FarmDto> selectAllFarmsBySensorType(int offset, int pageSize,String sensorType);
+
      TableView<FarmDto> selectAllFarms(int offset,int pageSize);
+
+
 }
