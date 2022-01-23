@@ -34,6 +34,8 @@ public class FarmServiceImpl implements FarmService {
 
         return TableView.<FarmDto>builder()
                 .list(farmDtoList)
+                .totalElements(farms.getTotalElements())
+                .totalPages(farms.getTotalPages())
                 .recordCount(farms.getSize())
                 .build();
     }
@@ -46,6 +48,8 @@ public class FarmServiceImpl implements FarmService {
 
         return TableView.<FarmDto>builder()
                 .list(farmDtoList)
+                .totalElements(farms.getTotalElements())
+                .totalPages(farms.getTotalPages())
                 .recordCount(farms.getSize())
                 .build();
     }
@@ -59,6 +63,8 @@ public class FarmServiceImpl implements FarmService {
 
         return TableView.<FarmDto>builder()
                 .list(farmDtoList)
+                .totalElements(farms.getTotalElements())
+                .totalPages(farms.getTotalPages())
                 .recordCount(farms.getSize())
                 .build();
     }
@@ -71,6 +77,8 @@ public class FarmServiceImpl implements FarmService {
 
         return TableView.<FarmDto>builder()
                 .list(farmDtoList)
+                .totalElements(farms.getTotalElements())
+                .totalPages(farms.getTotalPages())
                 .recordCount(farms.getSize())
                 .build();
     }

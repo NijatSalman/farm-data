@@ -25,8 +25,9 @@ public class FarmController {
 
     @PostMapping(value = "/upload", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public void uploadMultipart(@RequestParam("file") MultipartFile file) throws IOException {
-        String fileFormat="text/csv";
-        if (!fileFormat.equals(file.getContentType())){
+        String fileExcelFormat="application/vnd.ms-excel";
+        String fileCsvFormat="text/csv";
+        if (!(fileExcelFormat.equals(file.getContentType()) || fileCsvFormat.equals(file.getContentType()))){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"File format is invalid");
         }
         farmService.saveAll(CsvReadUtility.filteredDataMapToEntity(FarmDto.class, file.getInputStream()));
@@ -45,6 +46,11 @@ public class FarmController {
             return farmService.selectAllFarmsByMonth(offset, pageSize, months);
         }
             return farmService.selectAllFarmsByMonthsAndSensorType(offset,pageSize,months,sensorType);
+    }
+
+    @GetMapping("select/")
+    public TableView<FarmDto> getInitialFarms(){
+            return farmService.selectAllFarms(0, 10);
     }
 
 }

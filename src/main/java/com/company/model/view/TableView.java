@@ -9,5 +9,7 @@ import java.util.List;
 @Builder
 public class TableView<T> {
     private int recordCount;
+    private long totalElements;
+    private int totalPages;
     private List<T> list;
 }

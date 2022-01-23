@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/farm-data
+    url: jdbc:mysql://localhost:3306/farm-data?serverTimezone=UTC&useLegacyDatetimeCode=false
     username: dev
     password: 1234
     driver-class-name: com.mysql.jdbc.Driver
