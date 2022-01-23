@@ -3,6 +3,7 @@ package com.company.rest.controller;
 import com.company.model.dto.FarmDto;
 import com.company.model.view.TableView;
 import com.company.services.FarmService;
+import com.company.services.impl.FarmDynamicSelectFilterServiceImpl;
 import com.company.utility.CsvReadUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,6 +24,9 @@ public class FarmController {
     @Qualifier("farmService")
     FarmService farmService;
 
+    @Autowired
+    FarmDynamicSelectFilterServiceImpl farmDynamicSelectFilterService;
+
     @PostMapping(value = "/upload", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public void uploadMultipart(@RequestParam("file") MultipartFile file) throws IOException {
         String fileExcelFormat="application/vnd.ms-excel";
@@ -38,14 +42,8 @@ public class FarmController {
                                                   @PathVariable int pageSize,
                                                   @RequestParam(required = false) List<Integer> months,
                                                   @RequestParam(required = false) String sensorType){
-        if (months==null && sensorType==null){
-            return farmService.selectAllFarms(offset, pageSize);
-        }else if (months==null){
-            return  farmService.selectAllFarmsBySensorType(offset,pageSize,sensorType);
-        }else if (sensorType==null){
-            return farmService.selectAllFarmsByMonth(offset, pageSize, months);
-        }
-            return farmService.selectAllFarmsByMonthsAndSensorType(offset,pageSize,months,sensorType);
+
+        return farmDynamicSelectFilterService.selectFarms(offset,pageSize,months,sensorType);
     }
 
     @GetMapping("select/")
