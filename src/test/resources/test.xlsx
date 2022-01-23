@@ -1,0 +1,6 @@
+location,datetime,sensorType,value
+Friman Metsola collective,2018-12-31T15:00:00.000Z,pH,6.52
+Friman Metsola collective,2018-12-31T18:00:00.000Z,rainFall,-1.6
+Friman Metsola collective,2019-01-01T00:00:00.373Z,temperature,5
+Friman Metsola collective,2019-01-01T21:04:09.813Z,temperature,-12.2
+Friman Metsola collective,2019-01-01T11:49:37.397Z,temperature,-708.9

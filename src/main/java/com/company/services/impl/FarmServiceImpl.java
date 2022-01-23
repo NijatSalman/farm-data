@@ -27,10 +27,10 @@ public class FarmServiceImpl implements FarmService {
         farmRepository.saveAll(farms);
     }
 
-        @Override
+    @Override
     public TableView<FarmDto> selectAllFarmsByMonth(int offset, int pageSize, List<Integer> months) {
-        Page<Farm> farms= farmRepository.findAllByMonths(PageRequest.of(offset,pageSize),months);
-            List<FarmDto> farmDtoList=farms.stream().map(FarmMapper.INSTANCE::toDto).collect(Collectors.toList());
+        Page<Farm> farms = farmRepository.findAllByMonths(PageRequest.of(offset, pageSize), months);
+        List<FarmDto> farmDtoList = farms.stream().map(FarmMapper.INSTANCE::toDto).collect(Collectors.toList());
 
         return TableView.<FarmDto>builder()
                 .list(farmDtoList)
@@ -42,9 +42,9 @@ public class FarmServiceImpl implements FarmService {
 
     @Override
     public TableView<FarmDto> selectAllFarms(int offset, int pageSize) {
-        Page<Farm> farms= farmRepository.findAll(PageRequest.of(offset,pageSize));
+        Page<Farm> farms = farmRepository.findAll(PageRequest.of(offset, pageSize));
 
-        List<FarmDto> farmDtoList=farms.stream().map(FarmMapper.INSTANCE::toDto).collect(Collectors.toList());
+        List<FarmDto> farmDtoList = farms.stream().map(FarmMapper.INSTANCE::toDto).collect(Collectors.toList());
 
         return TableView.<FarmDto>builder()
                 .list(farmDtoList)
@@ -56,10 +56,10 @@ public class FarmServiceImpl implements FarmService {
 
 
     @Override
-    public TableView<FarmDto> selectAllFarmsByMonthsAndSensorType(int offset, int pageSize,List<Integer> months,String sensorType) {
-        Page<Farm> farms= farmRepository.findAllByMonthsAndSensorType(PageRequest.of(offset,pageSize),months,sensorType);
+    public TableView<FarmDto> selectAllFarmsByMonthsAndSensorType(int offset, int pageSize, List<Integer> months, String sensorType) {
+        Page<Farm> farms = farmRepository.findAllByMonthsAndSensorType(PageRequest.of(offset, pageSize), months, sensorType);
 
-        List<FarmDto> farmDtoList=farms.stream().map(FarmMapper.INSTANCE::toDto).collect(Collectors.toList());
+        List<FarmDto> farmDtoList = farms.stream().map(FarmMapper.INSTANCE::toDto).collect(Collectors.toList());
 
         return TableView.<FarmDto>builder()
                 .list(farmDtoList)
@@ -71,9 +71,9 @@ public class FarmServiceImpl implements FarmService {
 
     @Override
     public TableView<FarmDto> selectAllFarmsBySensorType(int offset, int pageSize, String sensorType) {
-        Page<Farm> farms= farmRepository.findAllBySensorType(PageRequest.of(offset,pageSize),sensorType);
+        Page<Farm> farms = farmRepository.findAllBySensorType(PageRequest.of(offset, pageSize), sensorType);
 
-        List<FarmDto> farmDtoList=farms.stream().map(FarmMapper.INSTANCE::toDto).collect(Collectors.toList());
+        List<FarmDto> farmDtoList = farms.stream().map(FarmMapper.INSTANCE::toDto).collect(Collectors.toList());
 
         return TableView.<FarmDto>builder()
                 .list(farmDtoList)
