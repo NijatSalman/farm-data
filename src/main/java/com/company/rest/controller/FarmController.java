@@ -5,6 +5,7 @@ import com.company.model.view.TableView;
 import com.company.services.FarmService;
 import com.company.services.impl.FarmDynamicSelectFilterService;
 import com.company.utility.CsvReadUtility;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,6 +27,7 @@ public class FarmController {
     FarmDynamicSelectFilterService farmDynamicSelectFilterService;
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ApiOperation(value="upload only csv file",notes="you cannot dupload except csv file")
     public void uploadMultipart(@RequestParam("file") MultipartFile file) throws IOException {
         String fileExcelFormat = "application/vnd.ms-excel";
         String fileCsvFormat = "text/csv";
@@ -36,6 +38,7 @@ public class FarmController {
     }
 
     @GetMapping("select/{offset}/{pageSize}")
+    @ApiOperation(value="get data up to an equal amount of pagesize",notes="if there are values it will get equal amount of pagesize with considering offset value",response=TableView.class)
     public TableView<FarmDto> getFarmsByMonth(@PathVariable int offset,
                                               @PathVariable int pageSize,
                                               @RequestParam(required = false) List<Integer> months,
@@ -45,6 +48,7 @@ public class FarmController {
     }
 
     @GetMapping("select/")
+    @ApiOperation(value="get first 10 farm datas",notes="if there are values it will get first 10 values",response=TableView.class)
     public TableView<FarmDto> getInitialFarms() {
         return farmService.selectAllFarms(0, 10);
     }
